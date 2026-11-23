@@ -2,59 +2,110 @@ import { useCallback, useEffect, useState } from "react";
 import type { ModuleItem } from "./types";
 import ModuleCard from "./components/ModuleCard";
 import ModuleModal from "./components/ModuleModal";
+import CardSkeleton from "./components/CardSkeleton";
 import ErrorView from "./components/ErrorView";
+import Reveal from "./components/Reveal";
+import SiteHeader from "./components/SiteHeader";
+import SiteFooter from "./components/SiteFooter";
 
 export default function App() {
   const [modules, setModules] = useState<ModuleItem[]>([]);
   const [failed, setFailed] = useState(false);
   const [active, setActive] = useState<ModuleItem | null>(null);
-  const close = useCallback(() => setActive(null), []);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = useCallback((m: ModuleItem) => {
+    setActive(m);
+    setModalOpen(true);
+  }, []);
+
+  const handleModalOpenChange = useCallback((open: boolean) => {
+    setModalOpen(open);
+    if (!open) window.setTimeout(() => setActive(null), 200);
+  }, []);
 
   useEffect(() => {
     fetch("/data/modules.json")
-      .then((r) => { if (!r.ok) throw new Error(); return r.json(); })
+      .then((r) => {
+        if (!r.ok) throw new Error();
+        return r.json();
+      })
       .then((d: ModuleItem[]) => setModules(d))
       .catch(() => setFailed(true));
   }, []);
 
   const path = window.location.pathname.replace(/\/+$/, "");
   if (path !== "" && path !== "/index.html")
-    return <ErrorView title="Halaman tidak ditemukan" message="Alamat yang Anda buka tidak tersedia atau sedang dalam perbaikan." />;
+    return (
+      <ErrorView
+        title="Halaman tidak ditemukan"
+        message="Alamat yang Anda buka tidak tersedia atau sedang dalam perbaikan."
+      />
+    );
   if (failed)
-    return <ErrorView title="Data layanan gagal dimuat" message="Periksa berkas public/data/modules.json, lalu muat ulang halaman." />;
+    return (
+      <ErrorView
+        title="Data layanan gagal dimuat"
+        message="Periksa berkas public/data/modules.json, lalu muat ulang halaman."
+      />
+    );
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <img src="/assets/bg.jpg" alt="" className="absolute inset-x-0 top-0 h-[75vh] w-full object-cover object-top" />
-      <div className="absolute inset-x-0 top-0 h-[75vh] bg-gradient-to-b from-primary/20 via-primary/70 to-primary" />
-
-      <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-8">
-        <header className="flex items-center justify-between gap-4">
-          <img src="/assets/logo-sip.png" alt="SIP DJKN" className="h-11 animate-fade" />
-          <img src="/assets/logo-kemenkeu.png" alt="Kementerian Keuangan Republik Indonesia" className="h-10 animate-fade" />
-        </header>
-
-        <main className="flex flex-1 flex-col justify-center py-14">
-          <div className="mx-auto mb-12 max-w-2xl text-center">
-            <h1 className="animate-rise text-4xl font-extrabold leading-tight md:text-5xl" style={{ animationDelay: "100ms" }}>
-              Sistem Informasi Penilaian DJKN
-            </h1>
-            <p className="mt-4 animate-rise text-lg font-medium text-accent" style={{ animationDelay: "220ms" }}>
-              Pilih layanan yang Anda butuhkan
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {modules.map((m, i) => <ModuleCard key={m.modul} item={m} index={i} onOpen={setActive} />)}
-          </div>
-        </main>
-
-        <footer className="flex justify-end">
-          <img src="/assets/hubungi-kami.png" alt="Hubungi Kami Kemenkeu Prime 134" className="h-14 rounded-xl animate-fade transition hover:scale-105" />
-        </footer>
+    <div className="relative flex min-h-screen flex-col bg-white">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[300px] overflow-hidden sm:h-[360px] lg:h-[430px]">
+        <img
+          src="/assets/bg.jpg"
+          alt=""
+          className="animate-hero h-full w-full object-cover object-[50%_38%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/55 via-primary/10 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent via-white/70 to-white" />
       </div>
 
-      {active && <ModuleModal item={active} onClose={close} />}
+      <div className="relative mx-auto w-full max-w-[1180px] flex-1 px-5 sm:px-8">
+        <SiteHeader />
+
+        <section className="pt-8 pb-4 sm:pt-9 sm:pb-5">
+          <h1
+            className="animate-rise text-[22px] font-extrabold leading-[1.18] tracking-[-0.02em] text-white text-shadow-hero sm:text-[28px] lg:text-[34px]"
+            style={{ animationDelay: "60ms" }}
+          >
+            Selamat Datang di Sistem Informasi Penilaian
+          </h1>
+          <h2
+            className="animate-rise mt-0.5 text-[19px] font-normal leading-[1.22] tracking-[-0.01em] text-white/95 text-shadow-hero sm:text-[25px] lg:text-[30px]"
+            style={{ animationDelay: "150ms" }}
+          >
+            Direktorat Jenderal Kekayaan Negara
+          </h2>
+          <p
+            className="animate-rise mt-3 max-w-[640px] text-[13px] leading-relaxed text-white/85 text-shadow-hero sm:text-[16px] lg:text-[17px]"
+            style={{ animationDelay: "250ms" }}
+          >
+            Akses layanan dan aplikasi sistem informasi penilaian DJKN melalui satu portal
+          </p>
+        </section>
+
+        <section className="grid items-stretch gap-5 pb-12 sm:gap-7 md:grid-cols-3 md:gap-11">
+          {modules.length === 0
+            ? [0, 1, 2].map((i) => (
+                <Reveal key={i} delay={i * 110}>
+                  <CardSkeleton />
+                </Reveal>
+              ))
+            : modules.map((m, i) => (
+                <Reveal key={m.modul} delay={i * 110} className="h-full">
+                  <ModuleCard item={m} onOpen={openModal} />
+                </Reveal>
+              ))}
+        </section>
+      </div>
+
+      <SiteFooter />
+
+      {active && (
+        <ModuleModal item={active} open={modalOpen} onOpenChange={handleModalOpenChange} />
+      )}
     </div>
   );
 }

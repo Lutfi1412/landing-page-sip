@@ -1,62 +1,102 @@
-import { useEffect, useRef } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 import { hasLink, type ModuleItem } from "../types";
+import ArrowUpRightIcon from "./ArrowUpRight";
 
-interface Props { item: ModuleItem; onClose: () => void; }
+interface Props {
+  item: ModuleItem;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
 
 const row =
-  "group flex w-full items-center gap-4 rounded-2xl bg-soft p-3 text-left text-primary transition duration-200 " +
-  "hover:bg-brand hover:text-white focus-visible:bg-brand focus-visible:text-white focus-visible:outline-none active:bg-brand active:text-white";
+  "group flex w-full items-center gap-3 rounded-xl border border-primary/12 bg-white p-2.5 transition duration-300 " +
+  "hover:-translate-y-0.5 hover:border-brand/30 hover:bg-soft/60 hover:shadow-[0_16px_35px_-24px_rgba(18,58,96,0.55)] " +
+  "focus-visible:border-brand/40 focus-visible:bg-soft/60 focus-visible:outline-none";
 
-export default function ModuleModal({ item, onClose }: Props) {
-  const closeRef = useRef<HTMLButtonElement>(null);
+const rowDisabled =
+  "group flex w-full items-center gap-3 rounded-xl border border-primary/5 bg-soft/40 p-2.5 text-primary/45";
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
-  }, [onClose]);
-
+export default function ModuleModal({ item, open, onOpenChange }: Props) {
   const children = item.child ?? [];
 
   return (
-    <div role="dialog" aria-modal="true" aria-label={item.modul} onClick={onClose}
-      className="fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-primary/70 p-4 backdrop-blur-sm animate-fade">
-      <div onClick={(e) => e.stopPropagation()} className="w-full max-w-xl rounded-3xl bg-white p-6 shadow-2xl animate-pop">
-        <div className="mb-5 flex items-center gap-4">
-          {item.ikon && <img src={item.ikon} alt="" className="h-14 w-14 object-contain" />}
-          <h2 className="flex-1 text-2xl font-bold text-primary">{item.modul}</h2>
-          <button ref={closeRef} type="button" onClick={onClose} aria-label="Tutup"
-            className="grid h-10 w-10 place-items-center rounded-full text-2xl text-primary transition hover:bg-soft hover:text-brand focus-visible:outline-4 focus-visible:outline-accent">
-            ×
-          </button>
-        </div>
+    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-primary/55 backdrop-blur-md data-[state=open]:animate-fade data-[state=closed]:animate-veil-out" />
 
-        {children.length === 0 && <p className="rounded-2xl bg-soft p-4 text-primary/70">Belum ada menu pada modul ini.</p>}
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[412px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-[20px] bg-white p-5 shadow-[0_40px_95px_-28px_rgba(4,18,48,0.8)] focus:outline-none data-[state=open]:animate-modal-in data-[state=closed]:animate-modal-out">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <Dialog.Title className="text-[18px] font-bold leading-tight text-primary">
+                {item.modul}
+              </Dialog.Title>
+              <Dialog.Description className="mt-1 text-[12px] text-primary/55">
+                Pilih aplikasi yang ingin anda akses
+              </Dialog.Description>
+            </div>
+            <Dialog.Close
+              aria-label="Tutup"
+              className="-mr-1.5 -mt-1.5 grid h-8 w-8 shrink-0 place-items-center rounded-full text-primary/70 transition hover:bg-soft hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            >
+              <X className="h-4 w-4" strokeWidth={2.2} aria-hidden="true" />
+            </Dialog.Close>
+          </div>
 
-        <ul className="space-y-2">
-          {children.map((c) => {
-            const body = (
-              <>
-                {c.gambar && <img src={c.gambar} alt="" className="h-14 w-14 shrink-0 rounded-xl object-cover" />}
-                <span className="flex-1">
-                  <span className="block font-semibold">{c.nama}</span>
-                  {c.deskripsi && <span className="block text-sm opacity-70">{c.deskripsi}</span>}
-                </span>
-                <span aria-hidden className="pr-2 text-xl transition-transform group-hover:translate-x-1">›</span>
-              </>
-            );
-            return (
-              <li key={c.nama}>
-                {hasLink(c.link)
-                  ? <a href={c.link} className={row}>{body}</a>
-                  : <div aria-disabled="true" className="flex w-full items-center gap-4 rounded-2xl bg-soft/60 p-3 text-primary/50">{body}</div>}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
+          {children.length === 0 && (
+            <p className="mt-4 rounded-xl bg-soft p-3.5 text-[12.5px] text-primary/70">
+              Belum ada aplikasi pada modul ini.
+            </p>
+          )}
+
+          <ul className="mt-4 space-y-2.5">
+            {children.map((c, i) => {
+              const inner = (
+                <>
+                  {c.gambar && (
+                    <img
+                      src={c.gambar}
+                      alt=""
+                      className="h-[52px] w-[52px] shrink-0 rounded-lg object-cover"
+                    />
+                  )}
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[13.5px] font-bold leading-snug text-primary">
+                      {c.nama}
+                    </span>
+                    {c.deskripsi && (
+                      <span className="mt-0.5 block text-[11.5px] leading-snug text-primary/55">
+                        {c.deskripsi}
+                      </span>
+                    )}
+                  </span>
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full text-primary transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                    <ArrowUpRightIcon className="h-3.5 w-3.5" />
+                  </span>
+                </>
+              );
+
+              return (
+                <li
+                  key={c.nama}
+                  className="animate-row-in"
+                  style={{ animationDelay: `${60 + i * 55}ms` }}
+                >
+                  {hasLink(c.link) ? (
+                    <a href={c.link} className={row}>
+                      {inner}
+                    </a>
+                  ) : (
+                    <div aria-disabled="true" className={rowDisabled}>
+                      {inner}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
