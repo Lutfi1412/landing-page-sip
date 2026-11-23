@@ -1,0 +1,31 @@
+[
+  {
+    "modul": "Basis Data",
+    "deskripsi": "Data properti, tanah, dan survei untuk mendukung penilaian.",
+    "link": null,
+    "ikon": "/assets/ikon-basis-data.png",
+    "child": [
+      { "nama": "Integrasi Data", "link": "https://example.com/integrasi-data", "deskripsi": "Gabungan data penilaian dari berbagai sumber.", "gambar": "/assets/integrasi-data.jpg" },
+      { "nama": "Survey Data Properti", "link": "https://example.com/survey-data-properti", "deskripsi": "Hasil survei data properti di lapangan.", "gambar": "/assets/survey-data-properti.jpg" },
+      { "nama": "Trend Harga Tanah", "link": "https://example.com/trend-harga-tanah", "deskripsi": "Pergerakan harga tanah dari waktu ke waktu.", "gambar": "/assets/trend-harga-tanah.jpg" }
+    ]
+  },
+  {
+    "modul": "Meja Penilaian",
+    "deskripsi": "Ruang kerja penilai untuk menyusun dan memeriksa penilaian.",
+    "link": null,
+    "ikon": "/assets/ikon-meja-penilaian.png",
+    "child": [
+      { "nama": "Meja Penilai", "link": "https://example.com/meja-penilai", "deskripsi": "Kerjakan penilaian dari awal sampai laporan.", "gambar": "/assets/meja-penilai.jpg" },
+      { "nama": "Revaluasi BMN", "link": "https://example.com/revaluasi-bmn", "deskripsi": "Penilaian ulang Barang Milik Negara.", "gambar": "/assets/revaluasi-bmn.jpg" },
+      { "nama": "Verkom", "link": "https://example.com/verkom", "deskripsi": "Verifikasi dan komparasi hasil penilaian.", "gambar": "/assets/verkom.jpg" }
+    ]
+  },
+  {
+    "modul": "Permohonan",
+    "deskripsi": "Ajukan permohonan penilaian secara daring.",
+    "link": "https://example.com/permohonan",
+    "ikon": "/assets/ikon-permohonan.png",
+    "child": []
+  }
+]
