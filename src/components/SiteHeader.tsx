@@ -5,9 +5,13 @@ export default function SiteHeader() {
         <img
           src="/assets/logo-kemenkeu.png"
           alt="Kementerian Keuangan Republik Indonesia"
-          className="h-7 w-auto"
+          className="h-7 sm:h-10 w-auto"
         />
-        <img src="/assets/logo-sip.png" alt="SIP DJKN" className="h-7 w-auto" />
+        <img
+          src="/assets/logo-sip.png"
+          alt="SIP DJKN"
+          className="h-7 sm:h-10 w-auto"
+        />
       </div>
     </header>
   );
