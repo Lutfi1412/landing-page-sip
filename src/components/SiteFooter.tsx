@@ -1,10 +1,23 @@
 import { Phone, Globe, Link2 } from "lucide-react";
 import Reveal from "./Reveal";
+import {
+  PhoneIcon,
+  GlobeIcon,
+  LinkSimpleHorizontalIcon,
+} from "@phosphor-icons/react";
 
 const contact = [
-  { icon: Phone, label: "Call Center 134", href: "tel:134" },
-  { icon: Globe, label: "kemenkeu-prime.kemenkeu.go.id", href: "https://kemenkeu-prime.kemenkeu.go.id" },
-  { icon: Link2, label: "https://kemenkeu-prime.kemenkeu.go.id", href: "https://kemenkeu-prime.kemenkeu.go.id" },
+  { icon: PhoneIcon, label: "Call Center 134", href: "tel:134" },
+  {
+    icon: GlobeIcon,
+    label: "kemenkeu-prime.kemenkeu.go.id",
+    href: "https://kemenkeu-prime.kemenkeu.go.id",
+  },
+  {
+    icon: LinkSimpleHorizontalIcon,
+    label: "https://kemenkeu-prime.kemenkeu.go.id",
+    href: "https://kemenkeu-prime.kemenkeu.go.id",
+  },
 ];
 
 export default function SiteFooter() {
@@ -17,15 +30,18 @@ export default function SiteFooter() {
             alt="Kementerian Keuangan Republik Indonesia"
             className="h-9 w-auto"
           />
-          <p className="mt-2.5 text-[11.5px] text-white/65">Direktorat Jenderal Kekayaan Negara</p>
+          {/* <p className="mt-2.5 text-[11.5px] text-white/65">Direktorat Jenderal Kekayaan Negara</p> */}
         </div>
 
         <div>
           <h3 className="text-[13px] font-semibold">Alamat</h3>
           <p className="mt-2.5 text-[11.5px] leading-[1.8] text-white/60">
-            Gedung Syafruddin Prawiranegara II<br />
-            Jl. Lapangan Banteng Timur 2-4<br />
-            Kecamatan Sawah Besar, Kota Jakarta Pusat,<br />
+            Gedung Syafruddin Prawiranegara II
+            <br />
+            Jl. Lapangan Banteng Timur 2-4
+            <br />
+            Kecamatan Sawah Besar, Kota Jakarta Pusat,
+            <br />
             Daerah Khusus Ibukota Jakarta 10710
           </p>
         </div>
@@ -39,7 +55,15 @@ export default function SiteFooter() {
                   href={href}
                   className="flex items-center gap-2 text-[11.5px] text-white/70 transition-colors hover:text-accent"
                 >
-                  <Icon className="h-4 w-4 shrink-0" strokeWidth={1.8} aria-hidden="true" />
+                  <Icon
+                    // className="h-4 w-4 shrink-0"
+                    // strokeWidth={2}
+                    // aria-hidden="true"
+
+                    size={16}
+                    color="#fbf9f9"
+                    weight="bold"
+                  />
                   <span className="truncate">{label}</span>
                 </a>
               </li>
