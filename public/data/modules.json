@@ -5,19 +5,19 @@
     "ikon": "/assets/ikon-meja-penilaian.png",
     "child": [{
         "nama": "Meja Penilai",
-        "link": "https://sipdjkn.kemenkeu.go.id/sip-backoffice/accounts/login",
+        "link": "",
         "deskripsi": "Penyelesaian Kegiatan Penilaian",
         "gambar": "/assets/meja-penilai.jpg"
       },
       {
         "nama": "Verkom",
-        "link": "https://sipdjkn.kemenkeu.go.id/sip-elearn-eksternal/login",
+        "link": "",
         "deskripsi": "Latihan, ujian dan verifikasi kompetensi",
         "gambar": "/assets/verkom.jpg"
       },
       {
         "nama": "Revaluasi BMN",
-        "link": "https://sipdjkn.kemenkeu.go.id/sip-reval/login",
+        "link": "",
         "deskripsi": "Kegiatan Revaluasi BMN",
         "gambar": "/assets/revaluasi-bmn.jpg"
       }
@@ -26,7 +26,7 @@
   {
     "modul": "Permohonan",
     "deskripsi": "Ajukan permohonan penilaian melalui layanan digital.",
-    "link": "https://sipdjkn.kemenkeu.go.id/sip-permohonan/Home/landing_page",
+    "link": "",
     "ikon": "/assets/ikon-permohonan.png",
     "child": []
   },
@@ -37,19 +37,19 @@
     "ikon": "/assets/ikon-basis-data.png",
     "child": [{
         "nama": "Integrasi Data",
-        "link": "https://sipdjkn.kemenkeu.go.id/sip-survey/index.php/login",
+        "link": "",
         "deskripsi": "Gabungan data penilaian dari berbagai sumber.",
         "gambar": "/assets/integrasi-data.jpg"
       },
       {
         "nama": "Survey Data Properti",
-        "link": "https://sipdjkn.kemenkeu.go.id/sip-data-pembanding/login",
+        "link": "",
         "deskripsi": "Hasil survei data properti di lapangan.",
         "gambar": "/assets/survey-data-properti.jpg"
       },
       {
         "nama": "Trend Harga Tanah",
-        "link": "https://sipdjkn.kemenkeu.go.id/sip-trenharga/Home/landing_page",
+        "link": "",
         "deskripsi": "Pergerakan harga tanah dari waktu ke waktu.",
         "gambar": "/assets/trend-harga-tanah.jpg"
       }
