@@ -25,7 +25,7 @@ export default function ModuleModal({ item, open, onOpenChange }: Props) {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-primary/55 backdrop-blur-md data-[state=open]:animate-fade data-[state=closed]:animate-veil-out" />
 
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[412px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-[20px] bg-white p-5 shadow-[0_40px_95px_-28px_rgba(4,18,48,0.8)] focus:outline-none data-[state=open]:animate-modal-in data-[state=closed]:animate-modal-out">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[412px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-[20px] bg-white p-5 shadow-[0_40px_95px_-28px_rgba(4,18,48,0.8)] focus:outline-none data-[state=open]:animate-modal-in data-[state=closed]:animate-modal-out xl:max-w-[440px] xl:p-6 3xl:max-w-[500px] 3xl:p-7">
           <div className="flex items-start justify-between gap-4">
             <div>
               <Dialog.Title className="text-[18px] font-bold leading-tight text-primary">

@@ -2,6 +2,8 @@
 @import "@fontsource-variable/inter";
 
 @theme {
+  --breakpoint-3xl: 1920px;
+
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
   --color-primary: #123a60;
@@ -50,6 +52,13 @@
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: none; }
   }
+}
+
+@utility shell {
+  width: 100%;
+  max-width: clamp(1180px, 88vw, 1920px);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4.5vw, 5rem);
 }
 
 body {

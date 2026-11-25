@@ -23,19 +23,19 @@ const contact = [
 export default function SiteFooter() {
   return (
     <footer className="bg-primary text-white">
-      <Reveal className="mx-auto grid w-full max-w-[1180px] gap-8 px-5 py-10 sm:px-8 md:grid-cols-2 lg:grid-cols-[minmax(240px,1.15fr)_minmax(0,1fr)_minmax(0,1.05fr)_auto] lg:items-start lg:gap-10">
+      <Reveal className="shell grid gap-8 py-10 md:grid-cols-2 lg:grid-cols-[minmax(240px,1.15fr)_minmax(0,1fr)_minmax(0,1.05fr)_auto] lg:items-start lg:gap-10 xl:gap-12 2xl:py-14 3xl:gap-16 3xl:py-16">
         <div>
           <img
             src="/assets/logo-kemenkeu.png"
             alt="Kementerian Keuangan Republik Indonesia"
-            className="h-9 w-auto"
+            className="h-9 w-auto 2xl:h-11"
           />
           {/* <p className="mt-2.5 text-[11.5px] text-white/65">Direktorat Jenderal Kekayaan Negara</p> */}
         </div>
 
         <div>
-          <h3 className="text-[13px] font-semibold">Alamat</h3>
-          <p className="mt-2.5 text-[11.5px] leading-[1.8] text-white/60">
+          <h3 className="text-[13px] font-semibold 2xl:text-[15px]">Alamat</h3>
+          <p className="mt-2.5 text-[11.5px] leading-[1.8] text-white/60 2xl:text-[13px]">
             Gedung Syafruddin Prawiranegara II
             <br />
             Jl. Lapangan Banteng Timur 2-4
@@ -47,13 +47,13 @@ export default function SiteFooter() {
         </div>
 
         <div>
-          <h3 className="text-[13px] font-semibold">Hubungi Kami</h3>
+          <h3 className="text-[13px] font-semibold 2xl:text-[15px]">Hubungi Kami</h3>
           <ul className="mt-2.5 space-y-2.5">
             {contact.map(({ icon: Icon, label, href }) => (
               <li key={label + href}>
                 <a
                   href={href}
-                  className="flex items-center gap-2 text-[11.5px] text-white/70 transition-colors hover:text-accent"
+                  className="flex items-center gap-2 text-[11.5px] text-white/70 transition-colors hover:text-accent 2xl:text-[13px]"
                 >
                   <Icon
                     // className="h-4 w-4 shrink-0"

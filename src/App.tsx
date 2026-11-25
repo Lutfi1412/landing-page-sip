@@ -52,7 +52,7 @@ export default function App() {
 
   return (
     <div className="relative flex min-h-screen flex-col bg-white">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[300px] overflow-hidden sm:h-[360px] lg:h-[430px]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[300px] overflow-hidden sm:h-[360px] lg:h-[430px] xl:h-[470px] 2xl:h-[520px] 3xl:h-[560px]">
         <img
           src="/assets/bg.jpg"
           alt=""
@@ -62,31 +62,31 @@ export default function App() {
         <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-b from-transparent via-white/70 to-white" />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1180px] flex-1 px-5 sm:px-8">
+      <div className="shell relative flex-1">
         <SiteHeader />
 
-        <section className="pt-8 pb-4 sm:pt-9 sm:pb-5">
+        <section className="pt-8 pb-4 sm:pt-9 sm:pb-5 xl:pt-12 xl:pb-7 3xl:pt-14">
           <h1
-            className="animate-rise text-[22px] font-extrabold leading-[1.18] tracking-[-0.02em] text-white text-shadow-hero sm:text-[28px] lg:text-[34px]"
+            className="animate-rise text-[22px] font-extrabold leading-[1.18] tracking-[-0.02em] text-white text-shadow-hero sm:text-[28px] lg:text-[34px] xl:text-[38px] 2xl:text-[44px] 3xl:text-[48px]"
             style={{ animationDelay: "60ms" }}
           >
             Selamat Datang di Sistem Informasi Penilaian
           </h1>
           <h2
-            className="animate-rise mt-0.5 text-[19px] font-normal leading-[1.22] tracking-[-0.01em] text-white/95 text-shadow-hero sm:text-[25px] lg:text-[30px]"
+            className="animate-rise mt-0.5 text-[19px] font-normal leading-[1.22] tracking-[-0.01em] text-white/95 text-shadow-hero sm:text-[25px] lg:text-[30px] xl:text-[33px] 2xl:text-[38px] 3xl:text-[42px]"
             style={{ animationDelay: "150ms" }}
           >
             Direktorat Jenderal Kekayaan Negara
           </h2>
           <p
-            className="animate-rise mt-3 max-w-[640px] text-[13px] leading-relaxed text-white/85 text-shadow-hero sm:text-[16px] lg:text-[17px]"
+            className="animate-rise mt-3 max-w-[640px] text-[13px] leading-relaxed text-white/85 text-shadow-hero sm:text-[16px] lg:text-[17px] xl:max-w-[720px] xl:text-[18px] 2xl:max-w-[780px] 2xl:text-[19px] 3xl:max-w-[860px] 3xl:text-[21px]"
             style={{ animationDelay: "250ms" }}
           >
             Akses layanan dan aplikasi sistem informasi penilaian DJKN melalui satu portal
           </p>
         </section>
 
-        <section className="grid items-stretch gap-5 pb-12 sm:gap-7 md:grid-cols-3 md:gap-11">
+        <section className="grid items-stretch gap-5 pb-12 sm:gap-7 md:grid-cols-3 md:gap-11 xl:gap-12 2xl:gap-16 3xl:gap-20">
           {modules.length === 0
             ? [0, 1, 2].map((i) => (
                 <Reveal key={i} delay={i * 110}>
